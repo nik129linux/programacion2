@@ -10,3 +10,5 @@ __pycache__/
 data/raw/*.parquet
 data/raw/*.feather
 data/raw/*.xlsx
+INFORME.md
+tarea.md
