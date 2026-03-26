@@ -1,11 +1,6 @@
 # Dashboard de Ciencia de Datos
 
-Proyecto autocontenido sobre enfermedad cardíaca construido a partir del trabajo previo del curso. La entrega usa como dataset principal `heart.csv` y extiende dos antecedentes:
-
-- `NICOLAS_CASANOVA_PRACTICA2/Nicolas_casanova.ipynb/Nicolas_casanova.ipynb`
-- `tarea4/actividad_hipotesis_regresion.ipynb`
-
-Toda la implementación nueva queda dentro de `tarea6` y no modifica los directorios originales.
+Proyecto autocontenido sobre enfermedad cardíaca construido a partir del trabajo previo del curso. La entrega usa como dataset principal `heart.csv` y extiende dos antecedentes
 
 ## Estructura
 
@@ -96,5 +91,5 @@ El dashboard incluye:
 Después de publicar el repositorio, el lanzamiento esperado es:
 
 ```text
-https://mybinder.org/v2/gh/<usuario>/programacion2/HEAD?urlpath=proxy/8050/
+https://mybinder.org/v2/gh/nik129linux/programacion2/HEAD?urlpath=proxy/8050/
 ```
