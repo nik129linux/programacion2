@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -e
+
+export PORT="${PORT:-8050}"
+python app.py

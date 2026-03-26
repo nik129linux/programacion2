@@ -1,0 +1,2 @@
+GitHub: https://github.com/<usuario>/programacion2
+Binder: https://mybinder.org/v2/gh/<usuario>/programacion2/HEAD?urlpath=proxy/8050/

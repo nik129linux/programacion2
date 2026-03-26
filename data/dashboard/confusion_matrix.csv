@@ -1,0 +1,13 @@
+experiment_id,model_name,real,predicho,valor
+baseline_tarea4_04,Baseline logístico tarea4,Sin enfermedad cardíaca,Sin enfermedad cardíaca,31
+baseline_tarea4_04,Baseline logístico tarea4,Sin enfermedad cardíaca,Con enfermedad cardíaca,11
+baseline_tarea4_04,Baseline logístico tarea4,Con enfermedad cardíaca,Sin enfermedad cardíaca,11
+baseline_tarea4_04,Baseline logístico tarea4,Con enfermedad cardíaca,Con enfermedad cardíaca,38
+logit_regularizado_02,Logit multivariable regularizado,Sin enfermedad cardíaca,Sin enfermedad cardíaca,35
+logit_regularizado_02,Logit multivariable regularizado,Sin enfermedad cardíaca,Con enfermedad cardíaca,7
+logit_regularizado_02,Logit multivariable regularizado,Con enfermedad cardíaca,Sin enfermedad cardíaca,10
+logit_regularizado_02,Logit multivariable regularizado,Con enfermedad cardíaca,Con enfermedad cardíaca,39
+random_forest_03,Random forest multivariable,Sin enfermedad cardíaca,Sin enfermedad cardíaca,32
+random_forest_03,Random forest multivariable,Sin enfermedad cardíaca,Con enfermedad cardíaca,10
+random_forest_03,Random forest multivariable,Con enfermedad cardíaca,Sin enfermedad cardíaca,11
+random_forest_03,Random forest multivariable,Con enfermedad cardíaca,Con enfermedad cardíaca,38

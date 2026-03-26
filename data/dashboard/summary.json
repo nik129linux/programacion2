@@ -1,0 +1,122 @@
+{
+  "source_dataset_path": "/home/nico/Documents/U/Co/C/s4/progtamacion2/NICOLAS_CASANOVA_PRACTICA2/Nicolas_casanova.ipynb/heart.csv",
+  "raw_n_observations": 1025,
+  "raw_n_columns": 14,
+  "modeling_n_observations": 302,
+  "duplicate_rows_removed": 723,
+  "null_values_total": 0,
+  "positive_class_rate": 0.543046357615894,
+  "target_distribution_pct": {
+    "0": 45.7,
+    "1": 54.3
+  },
+  "problem_statement": "Identificar factores clínicos y demográficos asociados con la presencia de enfermedad cardíaca y mejorar el baseline del curso.",
+  "default_feature": "thalach",
+  "scatter_features": [
+    "age",
+    "thalach",
+    "oldpeak"
+  ],
+  "predictor_count": 16,
+  "antecedent_notebook_regressions": [
+    {
+      "source": "practica2_notebook",
+      "x_column": "age",
+      "y_column": "chol",
+      "slope": 1.2500918810703003,
+      "intercept": 177.95231560554396,
+      "r_squared": 0.04832194674687951,
+      "correlation": 0.21982253466576043,
+      "mse": 2530.692994546764,
+      "mae": 38.36694538535537,
+      "n_observations": 1025
+    },
+    {
+      "source": "practica2_notebook",
+      "x_column": "age",
+      "y_column": "thalach",
+      "slope": -0.9895468570307366,
+      "intercept": 202.97928476880978,
+      "r_squared": 0.15227717008771258,
+      "correlation": -0.39022707503159343,
+      "mse": 448.23087823537304,
+      "mae": 17.154076506796255,
+      "n_observations": 1025
+    }
+  ],
+  "antecedent_linear_regression": {
+    "features": [
+      "age",
+      "trestbps",
+      "chol",
+      "oldpeak"
+    ],
+    "mse_test": 439.85111211999515,
+    "r2_test": 0.25272461210120944,
+    "r_squared_test": 0.25272461210120944,
+    "adjusted_r_squared_train": 0.22320024519347392,
+    "f_statistic_p_value": 1.7715110081038028e-11,
+    "coefficients": [
+      {
+        "term": "const",
+        "coef": 181.12095071695538,
+        "std_err": 12.128097343903113,
+        "t_value": 14.933995463683038,
+        "p_value": 1.1677062715360572e-34,
+        "ci_low": 157.2098407918757,
+        "ci_high": 205.03206064203505
+      },
+      {
+        "term": "age",
+        "coef": -0.9008087984191475,
+        "std_err": 0.15524124887402238,
+        "t_value": -5.8026381838125385,
+        "p_value": 2.4361636610439896e-08,
+        "ci_low": -1.206874165597244,
+        "ci_high": -0.5947434312410511
+      },
+      {
+        "term": "trestbps",
+        "coef": 0.11499079320861783,
+        "std_err": 0.08078303768906878,
+        "t_value": 1.4234522060338157,
+        "p_value": 0.15611788884019362,
+        "ci_low": -0.04427673569493393,
+        "ci_high": 0.2742583221121696
+      },
+      {
+        "term": "chol",
+        "coef": 0.033884624386594495,
+        "std_err": 0.025730958502272635,
+        "t_value": 1.3168815449918705,
+        "p_value": 0.1893414029626756,
+        "ci_low": -0.01684516115019446,
+        "ci_high": 0.08461440992338345
+      },
+      {
+        "term": "oldpeak",
+        "coef": -5.835186281866193,
+        "std_err": 1.2249887591472222,
+        "t_value": -4.763461083453833,
+        "p_value": 3.5866515629351694e-06,
+        "ci_low": -8.25030879007074,
+        "ci_high": -3.420063773661646
+      }
+    ],
+    "equation": "thalach = 181.1210 - 0.9008(age) + 0.1150(trestbps) + 0.0339(chol) - 5.8352(oldpeak)"
+  },
+  "main_conclusion": "El baseline de tarea4 con thalach y exang es útil como punto de partida, pero el modelo multivariable mejora la calidad predictiva sin perder interpretación clínica.",
+  "antecedent_mann_whitney_statistic": 5725.0,
+  "antecedent_mann_whitney_p_value": 1.3977197245773809e-13,
+  "chi_square_exang_target_statistic": 55.45620298199192,
+  "chi_square_exang_target_p_value": 9.556466486179178e-14,
+  "best_experiment_id": "logit_regularizado_02",
+  "best_model_name": "Logit multivariable regularizado",
+  "best_roc_auc_test": 0.8931000971817298,
+  "best_accuracy_test": 0.8131868131868132,
+  "best_f1_test": 0.8210526315789474,
+  "antecedent_logit_experiment_id": "baseline_tarea4_04",
+  "antecedent_logit_accuracy": 0.7582417582417582,
+  "antecedent_logit_f1": 0.7755102040816326,
+  "antecedent_logit_params": "C=1.0, solver=liblinear"
+}

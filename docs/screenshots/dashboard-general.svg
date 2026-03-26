@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f7f3eb"/>
+  <rect x="60" y="60" width="1160" height="160" rx="28" fill="#0f4c5c"/>
+  <rect x="60" y="250" width="270" height="120" rx="22" fill="#fffdf8" stroke="#d9cbb8"/>
+  <rect x="360" y="250" width="270" height="120" rx="22" fill="#fffdf8" stroke="#d9cbb8"/>
+  <rect x="660" y="250" width="270" height="120" rx="22" fill="#fffdf8" stroke="#d9cbb8"/>
+  <rect x="960" y="250" width="260" height="120" rx="22" fill="#fffdf8" stroke="#d9cbb8"/>
+  <rect x="60" y="410" width="560" height="250" rx="22" fill="#fffdf8" stroke="#d9cbb8"/>
+  <rect x="660" y="410" width="560" height="250" rx="22" fill="#fffdf8" stroke="#d9cbb8"/>
+  <text x="90" y="120" font-family="sans-serif" font-size="40" fill="#ffffff">Placeholder del dashboard</text>
+  <text x="90" y="170" font-family="sans-serif" font-size="22" fill="#d8ebef">Resumen ejecutivo y análisis exploratorio</text>
+  <text x="90" y="560" font-family="sans-serif" font-size="28" fill="#1f2933">Captura pendiente</text>
+  <text x="690" y="560" font-family="sans-serif" font-size="28" fill="#1f2933">Sección gráfica pendiente</text>
+</svg>
