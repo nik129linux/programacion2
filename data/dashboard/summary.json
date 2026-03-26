@@ -108,15 +108,122 @@
   "main_conclusion": "El baseline de tarea4 con thalach y exang es útil como punto de partida, pero el modelo multivariable mejora la calidad predictiva sin perder interpretación clínica.",
   "antecedent_mann_whitney_statistic": 5725.0,
   "antecedent_mann_whitney_p_value": 1.3977197245773809e-13,
+  "oldpeak_mann_whitney_statistic": 16722.5,
+  "oldpeak_mann_whitney_p_value": 3.346992658271788e-13,
   "chi_square_exang_target_statistic": 55.45620298199192,
   "chi_square_exang_target_p_value": 9.556466486179178e-14,
+  "chi_square_cp_target_statistic": 80.97876150785669,
+  "chi_square_cp_target_p_value": 1.8926838351935918e-17,
   "best_experiment_id": "logit_regularizado_02",
   "best_model_name": "Logit multivariable regularizado",
   "best_roc_auc_test": 0.8931000971817298,
   "best_accuracy_test": 0.8131868131868132,
   "best_f1_test": 0.8210526315789474,
+  "best_metric_confidence_intervals": [
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "accuracy",
+      "value": 0.8131868131868132,
+      "ci_low": 0.8139004905349948,
+      "ci_high": 0.823388886754382
+    },
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "precision",
+      "value": 0.8478260869565217,
+      "ci_low": 0.8472409659502887,
+      "ci_high": 0.858981270154718
+    },
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "recall",
+      "value": 0.7959183673469388,
+      "ci_low": 0.7948620845510219,
+      "ci_high": 0.8081233499823839
+    },
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "specificity",
+      "value": 0.8333333333333334,
+      "ci_low": 0.8326964383485842,
+      "ci_high": 0.84534519844583
+    },
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "f1",
+      "value": 0.8210526315789474,
+      "ci_low": 0.820090307126053,
+      "ci_high": 0.8299127963184059
+    },
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "roc_auc",
+      "value": 0.8931000971817298,
+      "ci_low": 0.8914444867538897,
+      "ci_high": 0.8994344023354172
+    },
+    {
+      "experiment_id": "logit_regularizado_02",
+      "metric": "pr_auc",
+      "value": 0.8952602964714654,
+      "ci_low": 0.8938026784981435,
+      "ci_high": 0.903868047126951
+    }
+  ],
+  "best_model_cv_summary": {
+    "accuracy_mean": 0.8579180509413067,
+    "accuracy_std": 0.06034624590940724,
+    "f1_mean": 0.8740897713050403,
+    "f1_std": 0.052769373674699506,
+    "roc_auc_mean": 0.9212128146453089,
+    "roc_auc_std": 0.03702920921715893,
+    "pr_auc_mean": 0.9396756134912971,
+    "pr_auc_std": 0.025409562040363882
+  },
   "antecedent_logit_experiment_id": "baseline_tarea4_04",
   "antecedent_logit_accuracy": 0.7582417582417582,
   "antecedent_logit_f1": 0.7755102040816326,
-  "antecedent_logit_params": "C=1.0, solver=liblinear"
+  "antecedent_logit_params": "C=1.0, solver=liblinear",
+  "iteration_model_rows": [
+    {
+      "iteration": "baseline_practica2",
+      "model": "Regresiones simples age->chol y age->thalach",
+      "accuracy": null,
+      "f1": null,
+      "roc_auc": null,
+      "decision": "Pasar de análisis exploratorio a clasificación supervisada."
+    },
+    {
+      "iteration": "baseline_tarea4",
+      "model": "Baseline logístico tarea4",
+      "accuracy": 0.7582417582417582,
+      "f1": 0.7755102040816326,
+      "roc_auc": 0.7956754130223518,
+      "decision": "Ampliar predictores y añadir validación cruzada para reducir sesgo del baseline bivariado."
+    },
+    {
+      "iteration": "logit_multivariable",
+      "model": "Logit multivariable regularizado",
+      "accuracy": 0.8131868131868132,
+      "f1": 0.8210526315789474,
+      "roc_auc": 0.8931000971817298,
+      "decision": "Comparar contra un modelo no lineal para verificar si hay ganancia material."
+    },
+    {
+      "iteration": "random_forest",
+      "model": "Random forest multivariable",
+      "accuracy": 0.7692307692307693,
+      "f1": 0.7835051546391752,
+      "roc_auc": 0.8731778425655976,
+      "decision": "Seleccionar el modelo final priorizando ROC AUC CV y estabilidad, no solo el score puntual de test."
+    },
+    {
+      "iteration": "modelo_final",
+      "model": "Logit multivariable regularizado",
+      "accuracy": 0.8131868131868132,
+      "f1": 0.8210526315789474,
+      "roc_auc": 0.8931000971817298,
+      "decision": "Conservar el modelo con mejor equilibrio entre desempeño, validación cruzada e interpretabilidad."
+    }
+  ]
 }

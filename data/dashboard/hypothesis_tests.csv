@@ -1,3 +1,5 @@
 source,test_name,feature,group_a,group_b,statistic,p_value,effect_value,ci_low,ci_high,significant
 tarea4_antecedente,mann_whitney_u,thalach,target = 0,target = 1,5725.0,1.3977197245773809e-13,19.0,15.0,26.262499999999932,True
+tarea6_extension,mann_whitney_u,oldpeak,target = 0,target = 1,16722.5,3.346992658271788e-13,-1.2,-1.6,-0.7999999999999999,True
 tarea6_extension,chi_square,exang_vs_target,exang,target,55.45620298199192,9.556466486179178e-14,,,,True
+tarea6_extension,chi_square,cp_vs_target,cp,target,80.97876150785669,1.8926838351935918e-17,,,,True

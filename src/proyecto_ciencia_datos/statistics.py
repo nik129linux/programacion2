@@ -85,6 +85,8 @@ def run_hypothesis_tests(
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict[str, float]]:
     group_zero = frame.loc[frame[target_column] == 0, "thalach"].to_numpy()
     group_one = frame.loc[frame[target_column] == 1, "thalach"].to_numpy()
+    oldpeak_zero = frame.loc[frame[target_column] == 0, "oldpeak"].to_numpy()
+    oldpeak_one = frame.loc[frame[target_column] == 1, "oldpeak"].to_numpy()
 
     normality_rows = []
     for target_value, sample in ((0, group_zero), (1, group_one)):
@@ -113,6 +115,20 @@ def run_hypothesis_tests(
     chi_square_statistic, chi_square_p_value, _, _ = stats.chi2_contingency(
         contingency_table
     )
+    oldpeak_statistic, oldpeak_p_value = stats.mannwhitneyu(
+        oldpeak_zero,
+        oldpeak_one,
+        alternative="two-sided",
+    )
+    oldpeak_median_diff, oldpeak_ci_low, oldpeak_ci_high = bootstrap_difference_interval(
+        oldpeak_one,
+        oldpeak_zero,
+        np.median,
+    )
+    cp_contingency_table = pd.crosstab(frame["cp"], frame[target_column])
+    cp_chi_square_statistic, cp_chi_square_p_value, _, _ = stats.chi2_contingency(
+        cp_contingency_table
+    )
 
     hypothesis_tests = pd.DataFrame(
         [
@@ -131,6 +147,19 @@ def run_hypothesis_tests(
             },
             {
                 "source": "tarea6_extension",
+                "test_name": "mann_whitney_u",
+                "feature": "oldpeak",
+                "group_a": "target = 0",
+                "group_b": "target = 1",
+                "statistic": float(oldpeak_statistic),
+                "p_value": float(oldpeak_p_value),
+                "effect_value": oldpeak_median_diff,
+                "ci_low": oldpeak_ci_low,
+                "ci_high": oldpeak_ci_high,
+                "significant": bool(oldpeak_p_value < 0.05),
+            },
+            {
+                "source": "tarea6_extension",
                 "test_name": "chi_square",
                 "feature": "exang_vs_target",
                 "group_a": "exang",
@@ -142,13 +171,30 @@ def run_hypothesis_tests(
                 "ci_high": np.nan,
                 "significant": bool(chi_square_p_value < 0.05),
             },
+            {
+                "source": "tarea6_extension",
+                "test_name": "chi_square",
+                "feature": "cp_vs_target",
+                "group_a": "cp",
+                "group_b": "target",
+                "statistic": float(cp_chi_square_statistic),
+                "p_value": float(cp_chi_square_p_value),
+                "effect_value": np.nan,
+                "ci_low": np.nan,
+                "ci_high": np.nan,
+                "significant": bool(cp_chi_square_p_value < 0.05),
+            },
         ]
     )
 
     summary = {
         "antecedent_mann_whitney_statistic": float(mann_whitney_statistic),
         "antecedent_mann_whitney_p_value": float(mann_whitney_p_value),
+        "oldpeak_mann_whitney_statistic": float(oldpeak_statistic),
+        "oldpeak_mann_whitney_p_value": float(oldpeak_p_value),
         "chi_square_exang_target_statistic": float(chi_square_statistic),
         "chi_square_exang_target_p_value": float(chi_square_p_value),
+        "chi_square_cp_target_statistic": float(cp_chi_square_statistic),
+        "chi_square_cp_target_p_value": float(cp_chi_square_p_value),
     }
     return hypothesis_tests, normality_checks, summary

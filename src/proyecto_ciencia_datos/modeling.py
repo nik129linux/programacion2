@@ -383,11 +383,21 @@ def _evaluate_configuration(
         "specificity_test": test_metrics["specificity"],
         "f1_test": test_metrics["f1"],
         "cv_roc_auc_mean": float(np.mean(cv_scores["test_roc_auc"])),
+        "cv_roc_auc_std": float(np.std(cv_scores["test_roc_auc"], ddof=1)),
         "cv_roc_auc_ci_low": cv_auc_low,
         "cv_roc_auc_ci_high": cv_auc_high,
         "cv_accuracy_mean": float(np.mean(cv_scores["test_accuracy"])),
+        "cv_accuracy_std": float(np.std(cv_scores["test_accuracy"], ddof=1)),
         "cv_accuracy_ci_low": cv_accuracy_low,
         "cv_accuracy_ci_high": cv_accuracy_high,
+        "cv_f1_mean": float(np.mean(cv_scores["test_f1"])),
+        "cv_f1_std": float(np.std(cv_scores["test_f1"], ddof=1)),
+        "cv_precision_mean": float(np.mean(cv_scores["test_precision"])),
+        "cv_precision_std": float(np.std(cv_scores["test_precision"], ddof=1)),
+        "cv_recall_mean": float(np.mean(cv_scores["test_recall"])),
+        "cv_recall_std": float(np.std(cv_scores["test_recall"], ddof=1)),
+        "cv_pr_auc_mean": float(np.mean(cv_scores["test_average_precision"])),
+        "cv_pr_auc_std": float(np.std(cv_scores["test_average_precision"], ddof=1)),
         "train_validation_gap": train_metrics["roc_auc"]
         - float(np.mean(cv_scores["test_roc_auc"])),
         "timestamp": datetime.now(timezone.utc).isoformat(),
@@ -594,6 +604,14 @@ def run_classification_experiments(
         (experiments["experiment_family"] == "baseline_tarea4")
         & (experiments["is_best_config"])
     ].iloc[0]
+    logit_best = experiments.loc[
+        (experiments["experiment_family"] == "logit_regularizado")
+        & (experiments["is_best_config"])
+    ].iloc[0]
+    random_forest_best = experiments.loc[
+        (experiments["experiment_family"] == "random_forest")
+        & (experiments["is_best_config"])
+    ].iloc[0]
 
     roc_curves = pd.concat(
         [stored_artifacts[experiment_id]["roc_curve"] for experiment_id in selected_ids],
@@ -628,10 +646,63 @@ def run_classification_experiments(
         "best_roc_auc_test": float(best_overall["roc_auc_test"]),
         "best_accuracy_test": float(best_overall["accuracy_test"]),
         "best_f1_test": float(best_overall["f1_test"]),
+        "best_metric_confidence_intervals": metric_confidence_intervals.to_dict("records"),
+        "best_model_cv_summary": {
+            "accuracy_mean": float(best_overall["cv_accuracy_mean"]),
+            "accuracy_std": float(best_overall["cv_accuracy_std"]),
+            "f1_mean": float(best_overall["cv_f1_mean"]),
+            "f1_std": float(best_overall["cv_f1_std"]),
+            "roc_auc_mean": float(best_overall["cv_roc_auc_mean"]),
+            "roc_auc_std": float(best_overall["cv_roc_auc_std"]),
+            "pr_auc_mean": float(best_overall["cv_pr_auc_mean"]),
+            "pr_auc_std": float(best_overall["cv_pr_auc_std"]),
+        },
         "antecedent_logit_experiment_id": str(baseline_best["experiment_id"]),
         "antecedent_logit_accuracy": float(baseline_best["accuracy_test"]),
         "antecedent_logit_f1": float(baseline_best["f1_test"]),
         "antecedent_logit_params": str(baseline_best["config_label"]),
+        "iteration_model_rows": [
+            {
+                "iteration": "baseline_practica2",
+                "model": "Regresiones simples age->chol y age->thalach",
+                "accuracy": None,
+                "f1": None,
+                "roc_auc": None,
+                "decision": "Pasar de análisis exploratorio a clasificación supervisada.",
+            },
+            {
+                "iteration": "baseline_tarea4",
+                "model": str(baseline_best["model_name"]),
+                "accuracy": float(baseline_best["accuracy_test"]),
+                "f1": float(baseline_best["f1_test"]),
+                "roc_auc": float(baseline_best["roc_auc_test"]),
+                "decision": "Ampliar predictores y añadir validación cruzada para reducir sesgo del baseline bivariado.",
+            },
+            {
+                "iteration": "logit_multivariable",
+                "model": str(logit_best["model_name"]),
+                "accuracy": float(logit_best["accuracy_test"]),
+                "f1": float(logit_best["f1_test"]),
+                "roc_auc": float(logit_best["roc_auc_test"]),
+                "decision": "Comparar contra un modelo no lineal para verificar si hay ganancia material.",
+            },
+            {
+                "iteration": "random_forest",
+                "model": str(random_forest_best["model_name"]),
+                "accuracy": float(random_forest_best["accuracy_test"]),
+                "f1": float(random_forest_best["f1_test"]),
+                "roc_auc": float(random_forest_best["roc_auc_test"]),
+                "decision": "Seleccionar el modelo final priorizando ROC AUC CV y estabilidad, no solo el score puntual de test.",
+            },
+            {
+                "iteration": "modelo_final",
+                "model": str(best_overall["model_name"]),
+                "accuracy": float(best_overall["accuracy_test"]),
+                "f1": float(best_overall["f1_test"]),
+                "roc_auc": float(best_overall["roc_auc_test"]),
+                "decision": "Conservar el modelo con mejor equilibrio entre desempeño, validación cruzada e interpretabilidad.",
+            },
+        ],
     }
 
     return ModelingResults(
