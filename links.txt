@@ -1,2 +1,2 @@
-GitHub: https://github.com/<usuario>/programacion2
-Binder: https://mybinder.org/v2/gh/<usuario>/programacion2/HEAD?urlpath=proxy/8050/
+GitHub: https://github.com/nik129linux/programacion2
+Binder: https://mybinder.org/v2/gh/nik129linux/programacion2/HEAD?urlpath=proxy/8050/
