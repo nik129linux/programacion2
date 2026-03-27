@@ -34,8 +34,8 @@ Proyecto autocontenido sobre enfermedad cardíaca construido a partir del trabaj
   - dataset de modelado: `302` filas únicas tras `drop_duplicates()`
 - Reproducción programática de antecedentes:
   - regresiones simples de `Práctica2`
-  - contraste de hipótesis y baseline logístico de `tarea4`
-  - regresión lineal múltiple de `tarea4`
+  - contraste de hipótesis y baseline logístico de `La actividad 2`
+  - regresión lineal múltiple de `La actividad 2`
 - Comparación final entre:
   - baseline logístico `thalach + exang`
   - regresión logística regularizada multivariable
@@ -70,10 +70,10 @@ La app queda disponible en `http://127.0.0.1:8050`.
 - El CSV original contiene `1025` filas, pero `723` son duplicados exactos.
 - El modelado se hace sobre `302` filas únicas para evitar métricas infladas.
 - `Práctica2` mostró que las regresiones simples con `age` no explicaban suficientemente `chol` ni `thalach`.
-- `tarea4` estableció como baseline una logística con `thalach + exang`, con:
+- `La actividad 2` estableció como baseline una logística con `thalach + exang`, con:
   - `accuracy ≈ 0.7582`
   - `f1 ≈ 0.7755`
-- `tarea6` amplía ese baseline con más predictores, regularización y validación cruzada.
+- `La actividad 3` amplía ese baseline con más predictores, regularización y validación cruzada.
 
 ## Dashboard
 
