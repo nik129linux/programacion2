@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -48,7 +49,17 @@ def create_dash_app(base_dir: Path | None = None) -> Dash:
         run_full_analysis(base_dir)
 
     bundle = load_dashboard_bundle(base_dir)
-    app = Dash(__name__, title="Dashboard de Enfermedad Cardíaca")
+    service_prefix = os.getenv("JUPYTERHUB_SERVICE_PREFIX")
+    port = os.getenv("PORT", "8050")
+    dash_prefix = None
+    if service_prefix:
+        dash_prefix = f"{service_prefix}proxy/{port}/"
+
+    app = Dash(
+        __name__,
+        title="Dashboard de Enfermedad Cardíaca",
+        requests_pathname_prefix=dash_prefix,
+    )
     app.layout = create_layout(bundle)
     register_callbacks(app, bundle)
     return app
