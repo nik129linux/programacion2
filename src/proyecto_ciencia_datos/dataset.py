@@ -5,24 +5,33 @@ from pathlib import Path
 import pandas as pd
 
 from proyecto_ciencia_datos.config import (
-    SOURCE_HEART_DATASET_PATH,
     TARGET_COLUMN,
     TARGET_LABEL_MAP,
 )
 
 
-def resolve_source_dataset_path(local_raw_copy: Path | None = None) -> Path:
+def resolve_source_dataset_path(
+    local_raw_copy: Path | None = None,
+    project_root: Path | None = None,
+) -> Path:
     if local_raw_copy and local_raw_copy.exists():
         return local_raw_copy
-    if SOURCE_HEART_DATASET_PATH.exists():
-        return SOURCE_HEART_DATASET_PATH
+
+    root_dir = project_root or Path(__file__).resolve().parents[2]
+    project_dataset_path = root_dir / "data" / "raw" / "heart.csv"
+    if project_dataset_path.exists():
+        return project_dataset_path
+
     raise FileNotFoundError(
-        f"No se encontró heart.csv en {SOURCE_HEART_DATASET_PATH}"
+        "Dataset heart.csv no encontrado en data/raw/. Coloque el archivo ahí antes de ejecutar."
     )
 
 
-def load_source_dataset(local_raw_copy: Path | None = None) -> pd.DataFrame:
-    source_path = resolve_source_dataset_path(local_raw_copy)
+def load_source_dataset(
+    local_raw_copy: Path | None = None,
+    project_root: Path | None = None,
+) -> pd.DataFrame:
+    source_path = resolve_source_dataset_path(local_raw_copy, project_root=project_root)
     return pd.read_csv(source_path)
 
 
@@ -52,7 +61,7 @@ def summarize_data_quality(
         .to_dict()
     )
     return {
-        "source_dataset_path": str(SOURCE_HEART_DATASET_PATH),
+        "source_dataset_path": "data/raw/heart.csv",
         "raw_n_observations": int(raw_frame.shape[0]),
         "raw_n_columns": int(raw_frame.shape[1]),
         "modeling_n_observations": int(modeling_frame.shape[0]),

@@ -5,7 +5,9 @@ from math import isclose
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
+from proyecto_ciencia_datos.dataset import resolve_source_dataset_path
 from proyecto_ciencia_datos.pipeline import run_full_analysis
 from proyecto_ciencia_datos.statistics import confidence_interval
 
@@ -17,6 +19,28 @@ def test_confidence_interval_contains_sample_mean() -> None:
 
     assert lower < upper
     assert lower <= sum(values) / len(values) <= upper
+
+
+def test_resolve_source_dataset_path_uses_project_relative_heart_csv(
+    tmp_path: Path,
+) -> None:
+    dataset_path = tmp_path / "data" / "raw" / "heart.csv"
+    dataset_path.parent.mkdir(parents=True)
+    dataset_path.write_text("age,target\n60,1\n", encoding="utf-8")
+
+    resolved = resolve_source_dataset_path(project_root=tmp_path)
+
+    assert resolved == dataset_path
+
+
+def test_resolve_source_dataset_path_raises_clear_error_when_missing(
+    tmp_path: Path,
+) -> None:
+    with pytest.raises(
+        FileNotFoundError,
+        match="Dataset heart.csv no encontrado en data/raw/. Coloque el archivo ahí antes de ejecutar.",
+    ):
+        resolve_source_dataset_path(project_root=tmp_path)
 
 
 def test_run_full_analysis_generates_required_heart_artifacts(tmp_path: Path) -> None:

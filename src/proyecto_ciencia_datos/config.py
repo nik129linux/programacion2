@@ -13,10 +13,6 @@ TARGET_LABEL_MAP = {
 }
 DEFAULT_FEATURE = "thalach"
 DEFAULT_SCATTER_FEATURES = ["age", "thalach", "oldpeak"]
-SOURCE_HEART_DATASET_PATH = Path(
-    "/home/nico/Documents/U/Co/C/s4/progtamacion2/"
-    "NICOLAS_CASANOVA_PRACTICA2/Nicolas_casanova.ipynb/heart.csv"
-)
 
 BASELINE_LOGIT_FEATURES = ["thalach", "exang"]
 LINEAR_BASELINE_FEATURES = ["age", "trestbps", "chol", "oldpeak"]
